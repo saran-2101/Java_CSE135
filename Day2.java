@@ -86,9 +86,9 @@ public class Day2 {
 
         // 8. TERNARY OPERATOR
         System.out.println("\n8. Ternary Operator");
-        int age = 20;
-        String result = (age >= 18) ? "Adult" : "Minor";
-        System.out.println("Age category: " + result);
+        int max = a > b ? (a > c ? a : c) : (b > c ? b : c);    
+        System.out.println(max);
+
     
         
         int f = 4567;
