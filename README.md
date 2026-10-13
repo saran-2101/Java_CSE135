@@ -7,8 +7,7 @@ My Java learning journey, documented day by day as part of CSE coursework.
 | Day | Topics | Status |
 |-----|--------|--------|
 | [Day 1](#day-1) | Java basics, data types, variables, type conversion, JVM internals | Done |
-| [Quick Summary](#Quick Summary) | Java basics, data types, variables, type conversion, JVM internals | Done |
-
+| [Day 2](#day-2) | Operators in Java | Done |
 
 ---
 
@@ -251,4 +250,241 @@ If verification fails, the JVM throws a `VerifyError` and the class is not execu
 
 ---
 
-*Notes from Day 1 of my Java learning journey. More to come.*
+## Day 2
+
+### Topics Covered
+
+1. [Operators in Java](#operators-in-java)
+2. [Arithmetic Operators](#1-arithmetic-operators)
+3. [Unary Operators](#2-unary-operators)
+4. [Assignment Operators](#3-assignment-operators)
+5. [Relational Operators](#4-relational-operators)
+6. [Logical Operators](#5-logical-operators)
+7. [Bitwise Operators](#6-bitwise-operators)
+8. [Shift Operators](#7-shift-operators)
+9. [Ternary Operator](#8-ternary-operator)
+
+---
+
+### Operators in Java
+
+Operators are special symbols that perform operations on **operands** (variables or values).
+
+```java
+int result = a + b;   // '+' is the operator, 'a' and 'b' are operands
+```
+
+| Category | Operators |
+|----------|-----------|
+| Arithmetic | `+` `-` `*` `/` `%` |
+| Unary | `+` `-` `++` `--` `!` `~` |
+| Assignment | `=` `+=` `-=` `*=` `/=` `%=` and more |
+| Relational | `==` `!=` `>` `<` `>=` `<=` |
+| Logical | `&&` `\|\|` `!` |
+| Bitwise | `&` `\|` `^` `~` |
+| Shift | `<<` `>>` `>>>` |
+| Ternary | `? :` |
+
+---
+
+### 1. Arithmetic Operators
+
+| Operator | Meaning | Example | Result |
+|----------|---------|---------|--------|
+| `+` | Addition (also string concatenation) | `10 + 3` | 13 |
+| `-` | Subtraction | `10 - 3` | 7 |
+| `*` | Multiplication | `10 * 3` | 30 |
+| `/` | Division | `10 / 3` | 3 |
+| `%` | Modulus (remainder) | `10 % 3` | 1 |
+
+```java
+int a = 10, b = 3;
+System.out.println(a / b);      // 3   (integer division drops the decimal)
+System.out.println(a / 3.0);    // 3.3333333333333335
+System.out.println(a % b);      // 1
+System.out.println("Hi " + a);  // Hi 10
+```
+
+Notes:
+- Dividing two integers gives an integer; the decimal part is dropped.
+- Integer division by zero throws `ArithmeticException`. Floating-point division by zero gives `Infinity`.
+
+---
+
+### 2. Unary Operators
+
+Work on a single operand.
+
+| Operator | Meaning |
+|----------|---------|
+| `+` | Unary plus |
+| `-` | Unary minus (negates the value) |
+| `++` | Increment by 1 |
+| `--` | Decrement by 1 |
+| `!` | Logical NOT (flips a boolean) |
+| `~` | Bitwise complement |
+
+#### Pre vs Post Increment
+
+```java
+int x = 5;
+int a = ++x;   // pre: increment first, then use  -> x = 6, a = 6
+
+int y = 5;
+int b = y++;   // post: use first, then increment -> b = 5, y = 6
+```
+
+---
+
+### 3. Assignment Operators
+
+Assign a value to a variable. Compound operators combine an operation with assignment.
+
+| Operator | Example | Same as |
+|----------|---------|---------|
+| `=` | `a = 5` | assign 5 to a |
+| `+=` | `a += 3` | `a = a + 3` |
+| `-=` | `a -= 3` | `a = a - 3` |
+| `*=` | `a *= 3` | `a = a * 3` |
+| `/=` | `a /= 3` | `a = a / 3` |
+| `%=` | `a %= 3` | `a = a % 3` |
+| `&=` `\|=` `^=` | `a &= 3` | `a = a & 3` etc. |
+| `<<=` `>>=` `>>>=` | `a <<= 2` | `a = a << 2` etc. |
+
+Compound assignment includes an **implicit cast**:
+
+```java
+byte b = 10;
+b += 5;        // OK: works because of the implicit cast
+// b = b + 5;  // Error: b + 5 is an int, needs an explicit cast
+```
+
+---
+
+### 4. Relational Operators
+
+Compare two values and return a `boolean`.
+
+| Operator | Meaning | Example (a=10, b=5) | Result |
+|----------|---------|---------------------|--------|
+| `==` | Equal to | `a == b` | false |
+| `!=` | Not equal to | `a != b` | true |
+| `>` | Greater than | `a > b` | true |
+| `<` | Less than | `a < b` | false |
+| `>=` | Greater than or equal to | `a >= b` | true |
+| `<=` | Less than or equal to | `a <= b` | false |
+
+Note: for objects like `String`, `==` compares **references** (addresses), not content. Use `.equals()` to compare content.
+
+```java
+String s1 = new String("java");
+String s2 = new String("java");
+System.out.println(s1 == s2);       // false (different objects)
+System.out.println(s1.equals(s2));  // true  (same content)
+```
+
+---
+
+### 5. Logical Operators
+
+Combine boolean expressions.
+
+| Operator | Name | Result |
+|----------|------|--------|
+| `&&` | Logical AND | true if **both** are true |
+| `\|\|` | Logical OR | true if **at least one** is true |
+| `!` | Logical NOT | reverses the value |
+
+Truth table:
+
+| A | B | A && B | A \|\| B | !A |
+|---|---|--------|----------|----|
+| true | true | true | true | false |
+| true | false | false | true | false |
+| false | true | false | true | true |
+| false | false | false | false | true |
+
+**Short-circuit evaluation:**
+- `&&`: if the left side is `false`, the right side is **not** evaluated.
+- `||`: if the left side is `true`, the right side is **not** evaluated.
+
+```java
+int a = 5;
+if (a > 10 && ++a > 0) { }   // ++a never runs, a stays 5
+```
+
+---
+
+### 6. Bitwise Operators
+
+Work on individual bits of integer types.
+
+| Operator | Name | Rule |
+|----------|------|------|
+| `&` | AND | 1 only if both bits are 1 |
+| `\|` | OR | 1 if at least one bit is 1 |
+| `^` | XOR | 1 if the bits are different |
+| `~` | NOT | flips every bit |
+
+```java
+int a = 5;   // 0101
+int b = 3;   // 0011
+
+a & b   // 0001 = 1
+a | b   // 0111 = 7
+a ^ b   // 0110 = 6
+~a      // -6
+```
+
+`&` and `|` also work on booleans, but unlike `&&` and `||` they do **not** short-circuit.
+
+---
+
+### 7. Shift Operators
+
+Shift the bits of a number left or right.
+
+| Operator | Name | Effect |
+|----------|------|--------|
+| `<<` | Left shift | Shifts bits left, fills with 0. Multiplies by 2^n |
+| `>>` | Signed right shift | Shifts bits right, keeps the sign bit. Divides by 2^n |
+| `>>>` | Unsigned right shift | Shifts bits right, always fills with 0 |
+
+```java
+int a = 8;
+a << 2     // 32  (8 * 2^2)
+a >> 2     // 2   (8 / 2^2)
+-8 >> 1    // -4  (sign preserved)
+-8 >>> 1   // 2147483644 (zero filled)
+```
+
+---
+
+### 8. Ternary Operator
+
+A shorthand for `if-else`. It is the only operator in Java that takes three operands.
+
+```java
+variable = (condition) ? valueIfTrue : valueIfFalse;
+```
+
+```java
+int age = 20;
+String result = (age >= 18) ? "Adult" : "Minor";   // Adult
+```
+
+---
+
+### Day 2 Quick Summary
+
+- Integer division drops the decimal; `%` gives the remainder
+- `++x` increments before use, `x++` after use
+- Compound assignment (`+=`) does an implicit cast
+- `==` compares references for objects; use `.equals()` for content
+- `&&` and `||` short-circuit; `&` and `|` do not
+- `<<` multiplies by 2^n, `>>` divides by 2^n, `>>>` fills with zeros
+- Ternary `? :` is a one-line if-else
+
+---
+
+*Notes from Days 1 and 2 of my Java learning journey. More to come.*
