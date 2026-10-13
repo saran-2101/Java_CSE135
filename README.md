@@ -7,7 +7,6 @@ My Java learning journey, documented day by day as part of CSE coursework.
 | Day | Topics | Status |
 |-----|--------|--------|
 | [Day 1](#day-1) | Java basics, data types, variables, type conversion, JVM internals | Done |
-| [Quick Summary](#Quick Summary) | Java basics, data types, variables, type conversion, JVM internals | Done |
 
 
 ---
