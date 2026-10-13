@@ -1,6 +1,6 @@
 // Operatores in Java 
 // 1.Arithmetic operators -- > +,-,*,/,%
-// 2. Assignment operators -- > +=,-+.*=,/=,==
+// 2. Assignment operators -- > +=,-=.*=,/=,==
 // 3. Relational operators -- >  ==,!=,>,<,>=,<=,  
 // 4. Logical operators -- > &&(AND),||(OR),!(NOT)
 // 5. Unary operators -- > +,-,++,--,!,~
