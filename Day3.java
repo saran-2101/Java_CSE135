@@ -6,18 +6,22 @@ public class Day3{
 
         //Code 1 Odd or Even
         System.out.println("Find Odd or Even");
-        int a = sc.nextInt();
-        if (a%2==0){
-            System.out.println(a + "is Even Number");
+        System.out.println("Enter Value: ");
+        int OE = sc.nextInt();
+        if (OE%2==0){
+            System.out.println(OE + " is Even Number");
         }
         else{
-            System.out.println(a + "is Odd Number");
+            System.out.println(OE + " is Odd Number");
         }
 
         //Code 2 Max value
-        System.out.println("Find Max value");
+        System.out.println("/n Find Max value");
+        System.out.println("Enter Value1: ");
         int n1 = sc.nextInt();
+        System.out.println("Enter Value2: ");
         int n2 = sc.nextInt();
+        System.out.println("Enter Value3: ");
         int n3 = sc.nextInt();
         if (n1 > n2 && n1 > n3){
             System.out.println(n1 + " is greater");
@@ -31,7 +35,8 @@ public class Day3{
         }
         
         //Code 3 Leap Year
-        System.out.println("Find Leap Year");
+        System.out.println("/n Find Leap Year");
+        System.out.println("Enter Year: ");
         int leep = sc.nextInt();
         if (leep%4==0 && leep%4!=0){
             System.out.println(leep + " is a leap year");
@@ -41,7 +46,8 @@ public class Day3{
         }
 
         //Code 4 Positive or Negative
-        System.out.println("Positive or Negative");
+        System.out.println("/n Positive or Negative");
+        System.out.println("Enter Value: ");
         int value = sc.nextInt();
         if(value<0){
             System.out.println(value + " is Negative Number");
@@ -51,31 +57,28 @@ public class Day3{
         }
 
         //Code 5 
-        import java.util.Scanner;
-        public class Main {
-    public static void main(String[] args) {
-boolean a=false;
-boolean b=true;
-int c=5;
-if(c<<2>15){
-if(b){
-a=!a;
-if(a){
-b=!b;
-if(b){
-c+=5;
-}else{
-c+=10;
-}
+        System.out.println("/n Positive or Negative");
+        boolean a = false;
+        boolean b = true;
+        int c=5;
+        if(c<<2>15){
+            if(b){
+                a=!a;
+                if(a){
+                    b=!b;
+                    if(b){
+                        c+=5;
+                    }
+                }
+            }
+        }
+        else{
+            c+=10;
+        }
+        System.out.println(c);
 
-}
-}
-}
-
-
-System.out.println(c);
-}}
-
-
-    }
+        //Code 6 Switch 
+        
+    }      
+        
 }
