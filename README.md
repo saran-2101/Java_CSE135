@@ -8,7 +8,7 @@ My Java learning journey, documented day by day as part of CSE coursework.
 |-----|--------|--------|
 | [Day 1](#day-1) | Java basics, data types, variables, type conversion, JVM internals | Done |
 | [Day 2](#day-2) | Operators in Java | Done |
-| [Day 3](#day-3) | Operators in Java | Done |
+| [Day 3](#day-3) | Conditional statements, switch case, loops, practice programs | Done |
 
 
 ---
@@ -489,10 +489,6 @@ String result = (age >= 18) ? "Adult" : "Minor";   // Adult
 
 ---
 
-*Notes from Days 1 and 2 of my Java learning journey. More to come.*
-
----
-
 ## Day 3
 
 ### Topics Covered
@@ -775,5 +771,3 @@ Lesson: test with edge cases (ties, zero, century years), not just the normal in
 - Always test edge cases
 
 ---
-
-*Notes from Days 1 to 3 of my Java learning journey. More to come.*
