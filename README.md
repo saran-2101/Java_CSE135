@@ -489,6 +489,291 @@ String result = (age >= 18) ? "Adult" : "Minor";   // Adult
 
 ---
 
+*Notes from Days 1 and 2 of my Java learning journey. More to come.*
+
+---
+
 ## Day 3
 
-*Notes from Days 1 and 2 of my Java learning journey. More to come.*
+### Topics Covered
+
+1. [Conditional Statements](#1-conditional-statements)
+2. [Switch Case](#2-switch-case)
+3. [Loops](#3-loops)
+4. [Practice Programs](#4-practice-programs)
+5. [Mistakes I Found](#5-mistakes-i-found)
+
+---
+
+### 1. Conditional Statements
+
+Conditional statements let a program choose which code to run based on a `boolean` condition.
+
+| Statement | Use |
+|-----------|-----|
+| `if` | Run a block only if the condition is true |
+| `if-else` | Choose between two blocks |
+| `else-if` ladder | Choose between many blocks; the first true condition runs |
+| Nested `if` | An `if` inside another `if` |
+
+```java
+if (marks >= 90) {
+    System.out.println("A");
+} else if (marks >= 75) {
+    System.out.println("B");
+} else {
+    System.out.println("C");
+}
+```
+
+Notes:
+- The condition must be a `boolean` (unlike C, `if (1)` is not allowed).
+- Conditions are built with relational (`>`, `==`) and logical (`&&`, `||`, `!`) operators from Day 2.
+- The shorthand for a simple if-else is the ternary operator: `(cond) ? a : b`.
+
+---
+
+### 2. Switch Case
+
+`switch` compares one value against several fixed cases. It is cleaner than a long else-if ladder when checking one variable against constants.
+
+#### Traditional switch (needs `break`)
+
+```java
+switch (day) {
+    case 1:
+        System.out.println("Monday");
+        break;
+    case 2:
+        System.out.println("Tuesday");
+        break;
+    default:
+        System.out.println("Invalid");
+}
+```
+
+Without `break`, execution **falls through** into the next case, which is a common source of bugs.
+
+#### Modern switch with arrow `->` (Java 14+)
+
+No `break` is needed and there is no fall-through. Multiple values can share one case.
+
+```java
+switch (day) {
+    case 1, 2, 3, 4, 5 -> System.out.println("Weekdays");
+    case 6, 7          -> System.out.println("Weekend");
+    default            -> System.out.println("Invalid");
+}
+```
+
+Allowed switch types: `byte`, `short`, `char`, `int`, their wrappers, `String`, and `enum`. Not allowed: `long`, `float`, `double`, `boolean`.
+
+---
+
+### 3. Loops
+
+Loops repeat a block of code while a condition holds.
+
+| Loop | Checks condition | Best when |
+|------|------------------|-----------|
+| `for` | Before each iteration | The number of repetitions is known |
+| `while` | Before each iteration | The number of repetitions is not known |
+| `do-while` | After each iteration | The body must run at least once |
+| Enhanced `for` | n/a | Reading every element of an array or collection |
+
+#### for loop
+
+```java
+for (int i = 1; i <= 5; i++) {
+    System.out.println(i);
+}
+```
+
+Parts: initialization (`int i = 1`), condition (`i <= 5`), update (`i++`).
+
+#### while loop
+
+```java
+int i = 1;
+while (i <= 5) {
+    System.out.println(i);
+    i++;
+}
+```
+
+#### do-while loop
+
+```java
+int i = 1;
+do {
+    System.out.println(i);
+    i++;
+} while (i <= 5);   // note the semicolon
+```
+
+#### Enhanced for loop
+
+```java
+int[] nums = {10, 20, 30};
+for (int n : nums) {
+    System.out.println(n);
+}
+```
+
+#### break and continue
+
+| Keyword | Effect |
+|---------|--------|
+| `break` | Exit the loop immediately |
+| `continue` | Skip the rest of this iteration and go to the next one |
+
+```java
+for (int i = 1; i <= 10; i++) {
+    if (i == 3) continue;   // skips 3
+    if (i == 6) break;      // stops at 6
+    System.out.println(i);  // prints 1 2 4 5
+}
+```
+
+Watch out for **infinite loops**, e.g. forgetting `i++` in a `while` loop.
+
+---
+
+### 4. Practice Programs
+
+All programs are in [`Day3.java`](Day3.java) and read input with `Scanner`.
+
+```java
+import java.util.Scanner;
+Scanner sc = new Scanner(System.in);
+```
+
+#### Program 1: Odd or Even
+
+A number is even if dividing by 2 leaves remainder 0.
+
+```java
+int num = sc.nextInt();
+if (num % 2 == 0) {
+    System.out.println(num + " is Even Number");
+} else {
+    System.out.println(num + " is Odd Number");
+}
+```
+
+#### Program 2: Maximum of Three Numbers
+
+```java
+if (n1 >= n2 && n1 >= n3) {
+    System.out.println(n1 + " is greater");
+} else if (n2 >= n1 && n2 >= n3) {
+    System.out.println(n2 + " is greater");
+} else {
+    System.out.println(n3 + " is greater");
+}
+```
+
+#### Program 3: Leap Year
+
+A year is a leap year if it is divisible by 4 and not by 100, **or** it is divisible by 400.
+
+```java
+if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+    System.out.println(year + " is a leap year");
+} else {
+    System.out.println(year + " is not a leap year");
+}
+```
+
+| Year | Result | Why |
+|------|--------|-----|
+| 2024 | Leap | Divisible by 4, not by 100 |
+| 1900 | Not leap | Divisible by 100 but not by 400 |
+| 2000 | Leap | Divisible by 400 |
+
+#### Program 4: Positive or Negative
+
+```java
+if (value > 0) {
+    System.out.println(value + " is Positive Number");
+} else if (value < 0) {
+    System.out.println(value + " is Negative Number");
+} else {
+    System.out.println("Zero");
+}
+```
+
+#### Program 5: Nested if Trace (output prediction)
+
+```java
+boolean a = false;
+boolean b = true;
+int c = 5;
+if (c << 2 > 15) {
+    if (b) {
+        a = !a;
+        if (a) {
+            b = !b;
+            if (b) {
+                c += 5;
+            }
+        }
+    }
+} else {
+    c += 10;
+}
+System.out.println(c);
+```
+
+Step-by-step trace:
+
+| Step | Check | Result |
+|------|-------|--------|
+| 1 | `c << 2` = 5 x 4 = 20, and `20 > 15` | true, enter outer if |
+| 2 | `if (b)`: b is true | true, enter |
+| 3 | `a = !a` makes a = true; `if (a)` | true, enter |
+| 4 | `b = !b` makes b = false; `if (b)` | false, skip `c += 5` |
+
+**Output: `5`**
+
+#### Program 6: Weekday or Weekend (switch)
+
+```java
+int day = sc.nextInt();
+switch (day) {
+    case 1, 2, 3, 4, 5 -> System.out.println("Weekdays");
+    case 6, 7 -> System.out.println("Weekend");
+    default -> System.out.println("Invalid");
+}
+```
+
+---
+
+### 5. Mistakes I Found
+
+Being honest about where my first version went wrong:
+
+| Program | Mistake | Fix |
+|---------|---------|-----|
+| Leap year | Wrote `year % 4 == 0 && year % 4 != 0`, which can never be true, so every year printed "not a leap year" | Use `% 100` for the second check and add the `% 400` rule |
+| Max of three | Used `>` only, so ties (e.g. 5, 5, 3) fall into the `else` and print the wrong value | Use `>=` |
+| Positive/negative | Zero was reported as "Positive" | Add a separate branch for zero |
+| Program 5 | Copied the heading "Positive or Negative" from the previous program | Give it its own label |
+| Switch | The first `switch` (`case 1:`) was left unfinished, which does not compile | Complete it with `break`, or use the arrow form |
+
+Lesson: test with edge cases (ties, zero, century years), not just the normal inputs.
+
+---
+
+### Day 3 Quick Summary
+
+- `if`, `else-if` and `else` pick one path; conditions must be `boolean`
+- `switch` suits one variable against fixed values; the traditional form needs `break`, the arrow form does not
+- `for` when the count is known, `while` when it is not, `do-while` when the body must run at least once
+- `break` exits a loop; `continue` skips to the next iteration
+- Leap year rule: `(y % 4 == 0 && y % 100 != 0) || y % 400 == 0`
+- Always test edge cases
+
+---
+
+*Notes from Days 1 to 3 of my Java learning journey. More to come.*
