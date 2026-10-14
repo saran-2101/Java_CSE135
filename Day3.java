@@ -16,7 +16,7 @@ public class Day3{
         }
 
         //Code 2 Max value
-        System.out.println("/n Find Max value");
+        System.out.println("\nFind Max value");
         System.out.println("Enter Value1: ");
         int n1 = sc.nextInt();
         System.out.println("Enter Value2: ");
@@ -35,7 +35,7 @@ public class Day3{
         }
         
         //Code 3 Leap Year
-        System.out.println("/n Find Leap Year");
+        System.out.println("\nFind Leap Year");
         System.out.println("Enter Year: ");
         int leep = sc.nextInt();
         if (leep%4==0 && leep%4!=0){
@@ -46,7 +46,7 @@ public class Day3{
         }
 
         //Code 4 Positive or Negative
-        System.out.println("/n Positive or Negative");
+        System.out.println("\nPositive or Negative");
         System.out.println("Enter Value: ");
         int value = sc.nextInt();
         if(value<0){
@@ -57,7 +57,7 @@ public class Day3{
         }
 
         //Code 5 
-        System.out.println("/n Positive or Negative");
+        System.out.println("\nPositive or Negative");
         boolean a = false;
         boolean b = true;
         int c=5;
@@ -78,7 +78,20 @@ public class Day3{
         System.out.println(c);
 
         //Code 6 Switch 
-        
+        int DAY = sc.nextInt();
+        switch(DAY){
+            case 1:
+                
+        }
+        //Switch without break()
+        int day = sc.nextInt();
+        switch(day){
+            case 1, 2, 3, 4, 5 -> System.out.println("Weekdays");
+            case 6, 7 -> System.out.println("Weekend");
+            default -> System.out.println("Invalid");
+        }
+
+
     }      
         
 }
