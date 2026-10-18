@@ -66,10 +66,10 @@ public class Day4 {
         int space = n/2;
         for (int i=0;i<n;i++){
             for (int j=0;j<space;j++){
-                System.out.print(" ");
+                System.out.print("  ");
             }
             for (int j=0;j<k;j++){
-                System.out.print("*"+" ");
+                System.out.print("* ");
             }
             k+=i<n/2?2:-2;
             space+=i<n/2?-1:1;
