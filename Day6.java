@@ -4,7 +4,7 @@ public class Day6{
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
 
-        // Problem 1
+        // Problem 1 Count common value
         // int count = 0;
         // int arr[] = {10,20,10,40,20,20,10}; 
         // for(int i:arr){
@@ -12,26 +12,26 @@ public class Day6{
         //         count+=1;
         //     }
         // }
-        // System.out.println("10 occurs " + count +" times" );
-
-
+        // System.out.println("10 occurs " + count +" times" ); 
+        
+        
         // Problem 2 Missing Positive Integer
-        // int arr1[] = {5,3,-1,2,1,8}; 
-        // // int arr1[] = {6,1,0,2,9,5,6,3,7,4}; 
-        // int count = 0;
-        // int temp =0;
-        // for(int i:arr1){
-        //     count += i>0?1:0;
-        // }
-        // int arr2[] = new int[count];
-        // for(int i=0;i<arr2.length;i++){
-        //     if(arr1[i]>0){
-        //         arr2[i]=arr1[i];
+        // int arr[] = {5,3,-1,2,1,8}; 
+        // int n = 1;
+        // while (true) {
+        //     boolean found = false;
+        //     for (int i : arr) {
+        //         if (i == n) {
+        //             found = true;
+        //             break;
+        //         }
         //     }
+        //     if (!found) {
+        //         System.out.println(n);
+        //         break;
+        //     }
+        //     n++;
         // }
-        // // System.out.println(count);
-        // // System.out.println(Arrays.toString(arr1));
-        // System.out.println(Arrays.toString(arr2));
 
 
         // Problem 3 Swap
@@ -53,24 +53,30 @@ public class Day6{
 
 
         // Problem 4 First and Last index Value
-        // int a[] = {10,20,30,40,20};
+        // int a[] = {10,20,30,20,40,20};
         // int target = 20;
         // int first = 0;
         // int last = 0;
         // for(int i=0;i<a.length;i++){
-        //     // first = a[i]==target?i:0;
-        //     last = a[i]==target?i:0;
-        //     if(a[i]==target){
-        //         first = i;
-        //         break;
+        //     if (a[i] == target){
+        //         if (first == 0)
+        //             first = i;
+        //         last = i;
         //     }
         // } 
-        // System.out.println("First Ocurrence:" + first);
-        // System.out.println("Last Ocurrence:" + last);
+        // System.out.println("First Ocurrence:" + first + "\n"
+        //     + "Last Ocurrence:" + last);
 
 
-        //Problem 5 Leat code 283
-
+        //Problem 5 Leat code 283(Move Zeroes)
+        // int num[] = {0,1,0,3,12};
+        // int arr[] = new int[num.length];
+        // int c=0;
+        // for(int i=0;i<num.length;i++){
+        //     if(num[i]>0)
+        //         arr[c++]=num[i];
+        // }
+        // IO.print(Arrays.toString(arr));
 
         //Problem 6 Leat code 44
 
@@ -120,12 +126,6 @@ public class Day6{
         //     int c = i%2==0?even++:odd++;
         // }
         // IO.println(even + "\n" + odd);
-
-        
-
-
-
-        
-
+    
     }
 }
