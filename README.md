@@ -9,7 +9,9 @@ My Java learning journey, documented day by day as part of CSE coursework.
 | [Day 1](#day-1) | Java basics, data types, variables, type conversion, JVM internals | Done |
 | [Day 2](#day-2) | Operators in Java | Done |
 | [Day 3](#day-3) | Conditional statements, switch case, loops, practice programs | Done |
-
+| [Day 4](#day-4) | Loop practice: sums, reverse a number, patterns, multiplication table | Done |
+| [Day 5](#day-5) | Arrays, 2D arrays, min/max, second largest and smallest | Done |
+| [Day 6](#day-6) | Strings and String methods, array problems | Done |
 
 ---
 
@@ -489,6 +491,8 @@ String result = (age >= 18) ? "Adult" : "Minor";   // Adult
 
 ---
 
+---
+
 ## Day 3
 
 ### Topics Covered
@@ -771,3 +775,629 @@ Lesson: test with edge cases (ties, zero, century years), not just the normal in
 - Always test edge cases
 
 ---
+
+## Day 4
+
+### Topics Covered
+
+1. [Sum of N Numbers](#1-sum-of-n-numbers)
+2. [Sum of Even and Odd Numbers](#2-sum-of-even-and-odd-numbers)
+3. [Reverse a Number](#3-reverse-a-number)
+4. [Number Pattern](#4-number-pattern)
+5. [Multiplication Table](#5-multiplication-table)
+6. [Diamond Star Pattern](#6-diamond-star-pattern)
+7. [Palindrome (started)](#7-palindrome-started)
+8. [Mistakes I Found](#8-mistakes-i-found-day-4)
+
+Day 4 was all about getting comfortable with `for` loops and nested loops. Code: [`Day4.java`](Day4.java).
+
+---
+
+### 1. Sum of N Numbers
+
+Add every number from 1 to `a`.
+
+```java
+int sum = 0;
+if (a > 0) {
+    for (int i = 1; i <= a; i++) {
+        sum = sum + i;
+    }
+}
+System.out.println("Sum Value: " + sum);
+```
+
+For `a = 5`: 1 + 2 + 3 + 4 + 5 = **15**.
+
+### 2. Sum of Even and Odd Numbers
+
+Keep two running totals and use `%` to decide which one to add to.
+
+```java
+int even = 0, odd = 0;
+for (int i = 1; i <= a; i++) {
+    if (i % 2 == 0) {
+        even = even + i;
+    } else {
+        odd = odd + i;
+    }
+}
+```
+
+For `a = 5`: even = 2 + 4 = **6**, odd = 1 + 3 + 5 = **9**.
+
+### 3. Reverse a Number
+
+Peel off the last digit with `% 10`, build the reversed number, then drop the digit with `/ 10`.
+
+```java
+int v = 0;
+for (int i = rev; i > 0; i /= 10) {
+    int digit = i % 10;
+    v = v * 10 + digit;
+}
+System.out.println(v);
+```
+
+Trace for `123`:
+
+| i | digit (i % 10) | v = v * 10 + digit |
+|---|----------------|--------------------|
+| 123 | 3 | 3 |
+| 12 | 2 | 32 |
+| 1 | 1 | 321 |
+
+### 4. Number Pattern
+
+Outer loop = rows, inner loop = columns. Row `i` prints numbers `1` to `i`.
+
+```java
+for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= i; j++) {
+        System.out.print(j + "  ");
+    }
+    System.out.println();
+}
+```
+
+Output for `n = 4`:
+
+```
+1
+1  2
+1  2  3
+1  2  3  4
+```
+
+### 5. Multiplication Table
+
+```java
+for (int i = 1; i <= 10; i++) {
+    System.out.println(table + "*" + i + "=" + table * i);
+}
+```
+
+`5*1=5`, `5*2=10`, ... `5*10=50`.
+
+### 6. Diamond Star Pattern
+
+Each row prints leading spaces, then stars. The star count grows by 2 on the way down to the middle row, then shrinks by 2. The space count does the opposite.
+
+```java
+int k = 1;           // stars in the current row
+int space = n / 2;   // leading spaces in the current row
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j < space; j++) System.out.print("  ");
+    for (int j = 0; j < k; j++)     System.out.print("* ");
+    k     += i < n / 2 ? 2 : -2;
+    space += i < n / 2 ? -1 : 1;
+    System.out.println();
+}
+```
+
+Output for `n = 5`:
+
+```
+    *
+  * * *
+* * * * *
+  * * *
+    *
+```
+
+The ternary operator from Day 2 is doing the "grow, then shrink" switch.
+
+### 7. Palindrome (started)
+
+The palindrome section is only a comment so far. It builds on the reverse-a-number program: reverse the number and check `reversed == original`.
+
+---
+
+### 8. Mistakes I Found (Day 4)
+
+| Program | Mistake | Fix |
+|---------|---------|-----|
+| Number pattern | Labelled "Star Pattern 1" but prints numbers, not stars | Rename the label, or print `"* "` instead of `j` |
+| Reverse a number | Prints `v` on every loop pass (leftover debug output) | Print once after the loop |
+| Reverse a number | Trailing zeros disappear (`100` becomes `1`) and negative numbers give `0` | Fine for a number; use a `String` if the zeros matter |
+| Diamond | Only symmetrical for **odd** `n` (even `n` looks lopsided) | Ask for an odd number |
+| Palindrome | Not finished | Reuse the reverse-a-number code |
+
+---
+
+### Day 4 Quick Summary
+
+- Outer loop controls rows, inner loop controls columns
+- `% 10` gets the last digit, `/ 10` removes it
+- Running totals (`sum`, `even`, `odd`) start at 0 before the loop
+- For patterns, work out how spaces and stars change per row
+- Test with awkward inputs (numbers ending in 0, even sizes)
+
+---
+
+## Day 5
+
+### Topics Covered
+
+1. [Arrays](#1-arrays)
+2. [2D Arrays](#2-2d-arrays)
+3. [Practice Programs](#3-practice-programs-day-5)
+4. [Mistakes I Found](#4-mistakes-i-found-day-5)
+
+Code: [`Day5.java`](Day5.java). In the file, each finished program is commented out so I can run one at a time.
+
+---
+
+### 1. Arrays
+
+An array stores a fixed number of values of the **same type** in one block of memory. Indexes start at **0**.
+
+```java
+int[] arr = {2, 33, 4, 6, 18, 22};   // declare + initialize
+int[] nums = new int[5];             // 5 slots, all default to 0
+
+arr[0]        // first element -> 2
+arr.length    // 6 (a field, not a method; no parentheses)
+```
+
+- Arrays are objects, so they live in the **heap** (see Day 1) and the variable holds a reference.
+- Size cannot change after creation.
+- Going outside `0` to `length - 1` throws `ArrayIndexOutOfBoundsException`.
+- `Arrays.toString(arr)` prints the contents. Printing `arr` directly prints a reference like `[I@1b6d3586`.
+
+Useful `java.util.Arrays` methods: `toString`, `sort`, `fill`, `copyOf`, `equals`, `deepToString`.
+
+### 2. 2D Arrays
+
+A 2D array is an **array of arrays**: a table with rows and columns.
+
+```java
+int[][] m = new int[3][4];                    // 3 rows, 4 columns, all 0
+int[][] g = { {1, 2, 3},
+              {4, 5, 6} };                    // 2 rows, 3 columns
+
+g[1][2]          // row 1, column 2 -> 6
+g.length         // number of rows -> 2
+g[0].length      // number of columns -> 3
+```
+
+Traversing with nested loops (outer = rows, inner = columns, just like the Day 4 patterns):
+
+```java
+for (int i = 0; i < g.length; i++) {
+    for (int j = 0; j < g[i].length; j++) {
+        System.out.print(g[i][j] + " ");
+    }
+    System.out.println();
+}
+```
+
+Printing a 2D array: use `Arrays.deepToString(g)`, since `Arrays.toString` only works one level deep.
+
+#### Transpose (swap rows and columns)
+
+```java
+int[][] t = new int[3][2];
+for (int i = 0; i < 2; i++)
+    for (int j = 0; j < 3; j++)
+        t[j][i] = g[i][j];
+
+System.out.println(Arrays.deepToString(t));   // [[1, 4], [2, 5], [3, 6]]
+```
+
+#### Jagged arrays
+
+Rows can have different lengths because each row is its own array.
+
+```java
+int[][] jag = new int[3][];
+jag[0] = new int[2];
+jag[1] = new int[4];
+jag[2] = new int[1];
+```
+
+---
+
+### 3. Practice Programs (Day 5)
+
+#### Program 1: Print an array in reverse
+
+```java
+int arr[] = {2, 33, 4, 6, 18, 22};
+for (int i = arr.length - 1; i >= 0; i--) {
+    System.out.println(arr[i]);
+}
+```
+
+#### Program 2: Copy an array into a reversed array
+
+Read 5 values, then write each one into the mirror position of a second array.
+
+```java
+int arr[] = new int[5];
+int rarr[] = new int[5];
+for (int i = 0; i < arr.length; i++) {
+    arr[i] = sc.nextInt();
+}
+for (int j = arr.length - 1, i = 0; j >= 0; j--, i++) {
+    rarr[j] = arr[i];
+}
+System.out.println(Arrays.toString(arr));
+System.out.print(Arrays.toString(rarr));
+```
+
+A `for` loop can run two variables at once (`j` goes down while `i` goes up).
+
+#### Program 3: Minimum and Maximum (two ways)
+
+Start `max` and `min` at the first element, then compare each element.
+
+```java
+int arr[] = {10, 33, -2, 45, -62, 26, 33, 41};
+int max = arr[0];
+int min = arr[0];
+for (int i = 0; i < arr.length; i++) {
+    max = Math.max(max, arr[i]);
+    min = Math.min(min, arr[i]);
+}
+```
+
+My first version used `if / else if` comparisons instead of `Math.max` and `Math.min`. Both work, and the `Math` version is shorter. Result: max = **45**, min = **-62**.
+
+#### Program 4: Second largest
+
+Track the largest and second largest together. When a new largest arrives, the old largest becomes the second.
+
+```java
+int arr[] = {10, 33, 2, 45, 62, 26, 33, 41};
+int max1 = 0, max2 = 0;
+for (int i = 0; i < arr.length; i++) {
+    if (max1 < arr[i]) {
+        max2 = max1;
+        max1 = arr[i];
+    } else if (max2 < arr[i]) {
+        max2 = arr[i];
+    }
+}
+System.out.println(max2);   // 45
+```
+
+#### Program 5: Second smallest
+
+Same idea in reverse, starting both from `arr[0]`.
+
+```java
+int min1 = arr[0], min2 = arr[0];
+for (int i = 0; i < arr.length; i++) {
+    if (min1 > arr[i]) {
+        min2 = min1;
+        min1 = arr[i];
+    } else if (min2 > arr[i]) {
+        min2 = arr[i];
+    }
+}
+System.out.println(min2);   // 10
+```
+
+---
+
+### 4. Mistakes I Found (Day 5)
+
+I ran edge cases against my own code:
+
+| Program | Input | What happens | Fix |
+|---------|-------|--------------|-----|
+| Second largest | `{-5, -2, -9}` (all negative) | Prints `0`, because `max1` and `max2` start at 0 | Start both at `Integer.MIN_VALUE` |
+| Second smallest | `{1, 5, 3}` | Prints `1` instead of `3`, because `min2` starts at `arr[0]`, which is already the smallest | Start both at `Integer.MAX_VALUE` |
+| Second largest | `{5, 5, 3}` | Gives `5`: a duplicate of the max counts as "second" | Add `&& arr[i] != max1` if you want the second **distinct** value |
+
+Corrected second largest:
+
+```java
+int max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE;
+for (int v : arr) {
+    if (v > max1) {
+        max2 = max1;
+        max1 = v;
+    } else if (v > max2 && v != max1) {
+        max2 = v;
+    }
+}
+```
+
+---
+
+### Day 5 Quick Summary
+
+- Array indexes run from `0` to `length - 1`; `length` has no parentheses
+- A 2D array is an array of arrays; use nested loops and `deepToString`
+- Initialize min/max trackers from the data or from `Integer.MIN_VALUE` / `MAX_VALUE`, not from `0`
+- `Math.max` and `Math.min` keep comparisons short
+- Test with negatives and duplicates
+
+---
+
+## Day 6
+
+### Topics Covered
+
+1. [Strings](#1-strings)
+2. [String Methods](#2-string-methods)
+3. [Array Problems](#3-array-problems)
+4. [Mistakes I Found](#4-mistakes-i-found-day-6)
+
+Code: [`Day6.java`](Day6.java). Again, solved problems are commented out so I run one at a time.
+
+---
+
+### 1. Strings
+
+A `String` is a sequence of characters. It is a **class** (a reference type from Day 1), not a primitive.
+
+```java
+String s1 = "Java";               // string literal -> goes to the String Pool
+String s2 = "Java";               // reuses the same pooled object
+String s3 = new String("Java");   // always creates a new object on the heap
+```
+
+Key points:
+- Strings are **immutable**: once created, the content never changes. Methods like `toUpperCase()` return a **new** string.
+- Identical literals share one object in the **String Pool**.
+- Compare content with `.equals()`, not `==` (see the relational operators section on Day 2).
+
+```java
+s1 == s2          // true  (same pooled object)
+s1 == s3          // false (different objects)
+s1.equals(s3)     // true  (same content)
+```
+
+```java
+String s = "hello";
+s.toUpperCase();              // returns "HELLO" but s is unchanged
+s = s.toUpperCase();          // now s is "HELLO"
+```
+
+For heavy editing (many appends in a loop), use `StringBuilder`, which is **mutable**.
+
+### 2. String Methods
+
+| Method | What it does | Example | Result |
+|--------|--------------|---------|--------|
+| `length()` | Number of characters | `"Hello".length()` | `5` |
+| `charAt(i)` | Character at index `i` | `"Hello".charAt(1)` | `'e'` |
+| `substring(a, b)` | From index `a` up to (not including) `b` | `"Hello".substring(1, 4)` | `"ell"` |
+| `substring(a)` | From index `a` to the end | `"Hello".substring(2)` | `"llo"` |
+| `indexOf(x)` | First index of `x`, or `-1` | `"banana".indexOf("an")` | `1` |
+| `lastIndexOf(x)` | Last index of `x`, or `-1` | `"banana".lastIndexOf("an")` | `3` |
+| `contains(x)` | Does it contain `x`? | `"Hello".contains("ell")` | `true` |
+| `startsWith(x)` / `endsWith(x)` | Check the start or end | `"Hello".startsWith("He")` | `true` |
+| `equals(x)` | Content equality (case sensitive) | `"a".equals("A")` | `false` |
+| `equalsIgnoreCase(x)` | Content equality, ignoring case | `"a".equalsIgnoreCase("A")` | `true` |
+| `compareTo(x)` | Dictionary order: negative, 0 or positive | `"apple".compareTo("banana")` | `-1` |
+| `toUpperCase()` / `toLowerCase()` | Change case | `"Hello".toUpperCase()` | `"HELLO"` |
+| `trim()` / `strip()` | Remove leading and trailing spaces | `"  Hi  ".trim()` | `"Hi"` |
+| `replace(a, b)` | Replace every `a` with `b` | `"banana".replace("a", "o")` | `"bonono"` |
+| `split(regex)` | Split into a `String[]` | `"a,b,c".split(",")` | `[a, b, c]` |
+| `concat(x)` | Join two strings (same as `+`) | `"Hi".concat("!")` | `"Hi!"` |
+| `repeat(n)` | Repeat `n` times | `"ab".repeat(2)` | `"abab"` |
+| `String.join(sep, ...)` | Join with a separator | `String.join("-", "a", "b")` | `"a-b"` |
+| `isEmpty()` | Is the length 0? | `"".isEmpty()` | `true` |
+| `isBlank()` | Empty or only spaces? | `"   ".isBlank()` | `true` |
+| `toCharArray()` | Convert to `char[]` | `"Hi".toCharArray()` | `['H', 'i']` |
+| `String.valueOf(x)` | Convert any value to a string | `String.valueOf(42)` | `"42"` |
+
+Notes:
+- `length()` has parentheses for strings, but `.length` has none for arrays.
+- `substring(a, b)` includes `a` and excludes `b`.
+- `compareTo` returns the difference between the first pair of characters that differ (`'a'` minus `'b'` is `-1`).
+
+#### Example: reverse a string
+
+Same idea as reversing an array, using `charAt`:
+
+```java
+String s = "java";
+String rev = "";
+for (int i = s.length() - 1; i >= 0; i--) {
+    rev += s.charAt(i);
+}
+System.out.println(rev);   // avaj
+```
+
+---
+
+### 3. Array Problems
+
+Practice problems from `Day6.java`, all solved with loops and arrays.
+
+#### Problem 1: Count how many times a value occurs
+
+```java
+int count = 0;
+int arr[] = {10, 20, 10, 40, 20, 20, 10};
+for (int i : arr) {
+    if (i == 10) count += 1;
+}
+System.out.println("10 occurs " + count + " times");   // 3
+```
+
+Uses the enhanced `for` loop from Day 3.
+
+#### Problem 2: Smallest missing positive integer
+
+Try `n = 1, 2, 3...` and search the array for each one. The first `n` not found is the answer.
+
+```java
+int arr[] = {5, 3, -1, 2, 1, 8};
+int n = 1;
+while (true) {
+    boolean found = false;
+    for (int i : arr) {
+        if (i == n) { found = true; break; }
+    }
+    if (!found) { System.out.println(n); break; }
+    n++;
+}
+// prints 4
+```
+
+Uses `while`, `break` and a `boolean` flag together.
+
+#### Problem 3: Sort by swapping
+
+Compare every pair (`i`, `j`) and swap when they are out of order. This is a simple exchange sort.
+
+```java
+int arr[] = {5, 3, -1, 2, 1, 8};
+for (int i = 0; i < arr.length; i++) {
+    for (int j = i + 1; j < arr.length; j++) {
+        if (arr[j] < arr[i]) {
+            int temp = arr[j];
+            arr[j] = arr[i];
+            arr[i] = temp;
+        }
+    }
+}
+// [-1, 1, 2, 3, 5, 8]
+```
+
+The `temp` variable holds one value while the two swap places.
+
+#### Problem 4: First and last index of a value
+
+```java
+int a[] = {10, 20, 30, 20, 40, 20};
+int target = 20;
+int first = -1, last = -1;
+for (int i = 0; i < a.length; i++) {
+    if (a[i] == target) {
+        if (first == -1) first = i;
+        last = i;
+    }
+}
+// first = 1, last = 5
+```
+
+(Shown with the fix described in the mistakes section below.)
+
+#### Problem 5: Move Zeroes (LeetCode 283)
+
+```java
+int num[] = {0, 1, 0, 3, 12};
+int arr[] = new int[num.length];
+int c = 0;
+for (int i = 0; i < num.length; i++) {
+    if (num[i] != 0) arr[c++] = num[i];
+}
+// [1, 3, 12, 0, 0]
+```
+
+A new array starts full of zeros, so copying the non-zero values to the front leaves the zeros at the end.
+
+#### Problem 6: Wildcard Matching (LeetCode 44)
+
+Not solved yet. This is a harder problem, and I left it as a placeholder to come back to.
+
+#### Problem 7: Single Number (LeetCode 136)
+
+Every number appears twice except one. Count each value with a nested loop and print the one that appears once.
+
+```java
+int nums[] = {4, 1, 2, 1, 2};
+for (int i = 0; i < nums.length; i++) {
+    int count = 0;
+    for (int j = 0; j < nums.length; j++) {
+        if (nums[i] == nums[j]) count++;
+    }
+    if (count == 1) System.out.print(nums[i]);   // 4
+}
+```
+
+This is O(n^2). A faster way uses the XOR operator from Day 2, since `x ^ x = 0` and `x ^ 0 = x`, so pairs cancel out:
+
+```java
+int result = 0;
+for (int n : nums) result ^= n;   // 4
+```
+
+#### Problem 8: Separate odd and even numbers into two arrays
+
+Count first so the two new arrays can be created with exactly the right size, then fill them.
+
+```java
+int arr[] = {6, 1, 0, 2, 9, 5, 6, 3, 7, 4};
+int ec = 0, oc = 0;
+for (int i : arr) {
+    if (i % 2 == 0) ec++; else oc++;
+}
+int Even[] = new int[ec];
+int Odd[]  = new int[oc];
+ec = 0; oc = 0;
+for (int i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 == 0) Even[ec++] = arr[i];
+    else                 Odd[oc++]  = arr[i];
+}
+// Even: [6, 0, 2, 6, 4]   Odd: [1, 9, 5, 3, 7]
+```
+
+Arrays cannot grow, which is why the counting pass is needed.
+
+#### Problem 9: Count odd and even numbers
+
+```java
+int even = 0, odd = 0;
+for (int i : arr) {
+    if (i % 2 == 0) even++; else odd++;
+}
+```
+
+My version used a ternary (`int c = i % 2 == 0 ? even++ : odd++;`). It works, but the variable `c` is never used, so a plain `if / else` is clearer.
+
+---
+
+### 4. Mistakes I Found (Day 6)
+
+| Problem | Mistake | Fix |
+|---------|---------|-----|
+| 4: First and last index | Used `first = 0` as the "not set" marker. If the target is at index 0 (`{20, 10, 20, 30}`), `first` gets overwritten and ends up as `2`. If the target is missing, it reports `0` and `0` | Start both at `-1` |
+| 5: Move zeroes | Used `num[i] > 0`, which also drops **negative** numbers (`{0, -1, 0, 3}` becomes `[3, 0, 0, 0]`) | Use `!= 0` |
+| 5: Move zeroes | LeetCode expects the change **in place**, but this builds a new array | Move non-zeros forward inside `num` itself, then fill the rest with 0 |
+| 3: "Swap" | It is really a sorting algorithm | Name it "Sort by swapping" |
+| 6: Wildcard Matching | Still empty | Come back after learning more |
+| `IO.print` / `IO.println` | These are newer Java helpers (recent JDKs); older versions will not compile them | Use `System.out.print` / `System.out.println` on older JDKs |
+
+---
+
+### Day 6 Quick Summary
+
+- A `String` is an immutable object; methods return new strings
+- Use `.equals()` for content, not `==`
+- Key methods: `length`, `charAt`, `substring`, `indexOf`, `split`, `replace`, `trim`, `toCharArray`
+- `length()` for strings, `.length` for arrays
+- Use `-1` (not `0`) as the "not found" marker, because `0` is a valid index
+- XOR (`^`) cancels out pairs, which solves Single Number in one pass
+- Arrays cannot grow, so count first when you need exact-size arrays
+
+---
+
+*Notes from Days 1 to 6 of my Java learning journey. More to come.*
